@@ -41,6 +41,10 @@ class RepliesController extends Controller
             return response('Thread is locked', 422);
         }
 
+        if (auth()->user()->confirmed) {
+            return response('You must confirm your email address before replying', 401);
+        }
+
         return $thread->addReply([
             'body' => request('body'),
             'user_id' => auth()->id()
