@@ -11,8 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/0.11.1/trix.css">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">>
 
     <!-- Scripts -->
     <script>
