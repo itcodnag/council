@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+
     use Notifiable;
 
     /**
@@ -20,6 +21,14 @@ class User extends Authenticatable
         'email',
         'password',
         'avatar_path'
+    ];
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'isAdmin'
     ];
 
     /**
@@ -100,7 +109,17 @@ class User extends Authenticatable
      */
     public function isAdmin()
     {
-        return in_array($this->name, ['JohnDoe', 'JaneDoe']);
+        return in_array($this->email, config('council.administrators'));
+    }
+
+    /**
+     * Determine if the user is an administrator.
+     *
+     * @return bool
+     */
+    public function getIsAdminAttribute()
+    {
+        return $this->isAdmin();
     }
 
     /**
