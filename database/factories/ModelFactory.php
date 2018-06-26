@@ -24,19 +24,11 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-
 $factory->state(App\User::class, 'unconfirmed', function () {
     return [
         'confirmed' => false
     ];
 });
-
-$factory->state(App\User::class, 'administrator', function () {
-    return [
-        'isAdmin' => true
-    ];
-});
-
 
 $factory->define(App\Thread::class, function ($faker) {
     $title = $faker->sentence;
