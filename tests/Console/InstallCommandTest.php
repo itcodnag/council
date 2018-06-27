@@ -1,8 +1,10 @@
 <?php
 namespace Tests\Console;
-use Illuminate\Support\Facades\File;
+
 use Mockery;
 use Tests\TestCase;
+use Illuminate\Support\Facades\File;
+
 class InstallCommandTest extends TestCase
 {
     public function setUp()
