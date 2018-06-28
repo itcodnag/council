@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 
 class ChannelsController extends Controller
 {
-
     /**
      * Show all channels.
      *
