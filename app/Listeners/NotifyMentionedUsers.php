@@ -5,7 +5,6 @@ namespace App\Listeners;
 use App\User;
 use App\Notifications\YouWereMentioned;
 
-
 class NotifyMentionedUsers
 {
     /**

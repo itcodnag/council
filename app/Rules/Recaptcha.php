@@ -18,8 +18,6 @@ class Recaptcha implements Rule
      */
     public function passes($attribute, $value)
     {
-
-
         return Zttp::asFormParams()->post(static::URL, [
             'secret' => config('services.recaptcha.secret'),
             'response' => $value,
