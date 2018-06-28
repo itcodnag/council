@@ -7,6 +7,8 @@ use Illuminate\Contracts\Validation\Rule;
 
 class Recaptcha implements Rule
 {
+    const URL = 'https://www.google.com/recaptcha/api/siteverify';
+
     /**
      * Determine if the validation rule passes.
      *
@@ -16,7 +18,9 @@ class Recaptcha implements Rule
      */
     public function passes($attribute, $value)
     {
-        return Zttp::asFormParams()->post('https://www.google.com/recaptcha/api/siteverify', [
+
+
+        return Zttp::asFormParams()->post(static::URL, [
             'secret' => config('services.recaptcha.secret'),
             'response' => $value,
             'remoteip' => request()->ip()
@@ -34,14 +38,13 @@ class Recaptcha implements Rule
     }
 
     /**
-     * Is Recaptcha in test mode?
-     * @method isInTestMode
+     * Determine if Recaptcha's keys are set to test mode.
      *
-     * @return   bool
+     * @return bool
      */
     public static function isInTestMode()
     {
-        return Zttp::asFormParams()->post('https://www.google.com/recaptcha/api/siteverify', [
+        return Zttp::asFormParams()->post(static::URL, [
             'secret' => config('services.recaptcha.secret'),
             'response' => 'test',
             'remoteip' => request()->ip()
