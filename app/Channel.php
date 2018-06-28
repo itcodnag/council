@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Channel extends Model
 {
-
     /**
      * The attributes that aren't mass assignable.
      *
