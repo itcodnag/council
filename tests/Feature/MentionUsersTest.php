@@ -34,7 +34,7 @@ class MentionUsersTest extends TestCase
 
         $this->assertEquals(
             "JohnDoe mentioned you in \"{$thread->title}\"",
-            $jane->notificatations->first()->data['message']
+            $jane->notifications->first()->data['message']
         );
     }
 
@@ -64,7 +64,7 @@ class MentionUsersTest extends TestCase
 
         $this->assertEquals(
             "JohnDoe mentioned you in \"{$thread->title}\"",
-            $jane->notificatations->first()->data['message']
+            $jane->notifications->first()->data['message']
         );
     }
 

@@ -46,7 +46,7 @@ class NotificationsTest extends TestCase
 
         $this->assertCount(
             1,
-            $this->getJson(route('user-notification', auth()->user()->name))->json()
+            $this->getJson(route('user-notifications', auth()->user()->name))->json()
         );
     }
 
