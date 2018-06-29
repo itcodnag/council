@@ -50,11 +50,11 @@ class ReadThreadsTest extends TestCase
         $this->signIn(create('App\User', ['name' => 'JohnDoe']));
 
         $johnsThread = create('App\Thread', ['user_id' => auth()->id()]);
-        $johnsThread = create('App\Thread');
+        $janesThread = create('App\Thread');
 
         $this->get('threads?by=JohnDoe')
             ->assertSee($johnsThread->title)
-            ->assertDontSee($johnsThread->title);
+            ->assertDontSee($janesThread->title);
     }
 
     /** @test */
