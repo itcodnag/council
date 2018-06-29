@@ -1,4 +1,4 @@
- # Council [![Build Status](https://travis-ci.org/JeffreyWay/council.svg?branch=master)](https://travis-ci.org/JeffreyWay/council)
+ # Council [![Build Status](https://travis-ci.org/itcodnag/council.svg?branch=master)](https://travis-ci.org/itcodnag/council)
  
  This is an open source forum that was built and maintained at Laracasts.com.
  
