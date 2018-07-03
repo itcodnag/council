@@ -38,7 +38,7 @@
 
         <div class="panel-footer">
             <div class="level">
-                <div>
+                <div class="flex">
                     {{ $thread->visits }} Visits
                 </div>
                 <a href="/threads/{{ $thread->channel->slug }}"><span class="label label-primary">{{ $thread->channel->name }}</span></a>
