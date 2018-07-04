@@ -4,7 +4,7 @@
            class="dropdown-toggle"
            aria-haspopup="true"
            aria-expanded="false"
-           @click.prevent="toggle = !toggle"
+           @click.prevent="toggle = ! toggle"
         >
             Channels <span class="caret"></span>
         </a>
