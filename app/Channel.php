@@ -78,7 +78,7 @@ class Channel extends Model
     /**
      *  Get a new query builder that includes archives.
      */
-    public function withArchived()
+    public static function withArchived()
     {
         return (new static)->newQueryWithoutScope('active');
     }
