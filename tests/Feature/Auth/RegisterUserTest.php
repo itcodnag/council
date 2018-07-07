@@ -34,8 +34,10 @@ class RegisterUserTest extends TestCase
         ]);
 
         $response->assertRedirect('/threads');
+
         $this->assertTrue(Auth::check());
         $this->assertCount(1, User::all());
+
         tap(User::first(), function ($user) {
             $this->assertEquals('John Doe', $user->name);
             $this->assertEquals('johndoe', $user->username);
@@ -45,7 +47,7 @@ class RegisterUserTest extends TestCase
     }
 
     /** @test */
-    function a_confirmation_email_is_sent_upon_registration()
+    public function a_confirmation_email_is_sent_upon_registration()
     {
         $this->post(route('register'), $this->validParams());
 
@@ -53,7 +55,7 @@ class RegisterUserTest extends TestCase
     }
 
     /** @test */
-    function user_can_fully_confirm_their_email_addresses()
+    public function user_can_fully_confirm_their_email_addresses()
     {
         $this->post(route('register'), $this->validParams([
             'email' => 'john@example.com',
@@ -74,7 +76,7 @@ class RegisterUserTest extends TestCase
     }
 
     /** @test */
-    function confirming_an_invalid_token()
+    public function confirming_an_invalid_token()
     {
         $this->get(route('register.confirm', ['token' => 'invalid']))
             ->assertRedirect(route('threads'))
