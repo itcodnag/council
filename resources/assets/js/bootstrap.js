@@ -2,7 +2,7 @@
 window._ = require('lodash');
 
 import InstantSearch from 'vue-instantsearch';
-import VModal from 'vue-js-modals'
+import VModal from 'vue-js-modal'
 
 window.$ = window.jQuery = require('jquery');
 
