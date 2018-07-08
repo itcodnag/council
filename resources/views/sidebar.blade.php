@@ -1,6 +1,10 @@
 <aside class="w-1/3 bg-grey-lighter p-6 pr-10">
     <div class="widget border-b-0">
-        <button class="btn is-green w-full" @click="$modal.show('new-thread')">Add New Thread</button>
+        @if (auth()->check())
+            <button class="btn is-green w-full" @click="$modal.show('new-thread')">Add New Thread</button>
+        @else
+            <button class="btn is-green w-full" @click="$modal.show('register')">Join Us!</button>
+        @endif
     </div>
 
     <div class="widget">
@@ -17,8 +21,12 @@
             @if (auth()->check())
                 <li class="pb-3">
                     <a href="/threads?by={{ auth()->user()->username }}"
-                       class="text-grey-darkest hover:text-blue hover:font-bold  {{ Request::query('by') ? 'text-blue font-bold' : '' }}"
+                       class="flex items-center text-grey-darkest hover:text-blue hover:font-bold  {{ Request::query('by') ? 'text-blue font-bold' : '' }}"
                     >
+                        <img src="{{ auth()->user()->avatar_path }}"
+                             alt="{{ auth()->user()->username }}"
+                             class="w-4 mr-2">
+
                         My Threads
                     </a>
                 </li>
