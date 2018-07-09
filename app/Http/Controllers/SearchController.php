@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Thread;
-use App\Trending;
 
 class SearchController extends Controller
 {
@@ -13,14 +12,12 @@ class SearchController extends Controller
      * @param  \App\Trending $trending
      * @return mixed
      */
-    public function show(Trending $trending)
+    public function show()
     {
         if (request()->expectsJson()) {
             return Thread::search(request('q'))->paginate(25);
         }
 
-        return view('threads.search', [
-            'trending' => $trending->get()
-        ]);
+        return view('threads.search');
     }
 }
