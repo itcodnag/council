@@ -24,7 +24,6 @@ class ThreadsController extends Controller
      *
      * @param  Channel      $channel
      * @param ThreadFilters $filters
-     * @param \App\Trending $trending
      * @return \Illuminate\Http\Response
      */
     public function index(Channel $channel, ThreadFilters $filters)
