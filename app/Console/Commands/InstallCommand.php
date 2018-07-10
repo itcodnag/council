@@ -150,6 +150,6 @@ class InstallCommand extends Command
 
         $question->setHidden(true)->setHiddenFallback($fallback);
 
-        $password = $this->output->askQuestion($question);
+        return $this->output->askQuestion($question);
     }
 }
