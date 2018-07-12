@@ -14,7 +14,7 @@ class UserTest extends TestCase
     {
         $user = create(\App\User::class);
 
-        $reply = create(\App\User::class, ['user_id' => $user->id]);
+        $reply = create(\App\Reply::class, ['user_id' => $user->id]);
 
         $this->assertEquals($reply->id, $user->lastReply->id);
     }

@@ -15,7 +15,7 @@ class ReadThreadsTest extends TestCase
     {
         parent::setUp();
 
-        $this->thread = create(\App\Thread::classj);
+        $this->thread = create(\App\Thread::class);
     }
 
     /** @test */
@@ -61,7 +61,7 @@ class ReadThreadsTest extends TestCase
     public function a_user_can_filter_threads_by_popularity()
     {
         $threadWithTwoReplies = create(\App\Thread::class);
-        create(\App\Reply::classj, ['thread_id' => $threadWithTwoReplies->id], 2);
+        create(\App\Reply::class, ['thread_id' => $threadWithTwoReplies->id], 2);
 
         $threadWithThreeReplies = create(\App\Thread::class);
         create(\App\Reply::class, ['thread_id' => $threadWithThreeReplies->id], 3);

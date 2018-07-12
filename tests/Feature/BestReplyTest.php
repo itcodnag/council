@@ -34,7 +34,7 @@ class BestReplyTest extends TestCase
 
         $thread = create(\App\Thread::class, ['user_id' => auth()->id()]);
 
-        $replies = create(\App\Rely::class, ['thread_id' => $thread->id], 2);
+        $replies = create(\App\Reply::class, ['thread_id' => $thread->id], 2);
 
         $this->signIn(create(\App\User::class));
 

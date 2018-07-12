@@ -17,7 +17,7 @@ class PinThreadsTest extends TestCase
 
         $this->signIn();
 
-        $thread = create(\App\Thread::classj, ['user_id' => auth()->id()]);
+        $thread = create(\App\Thread::class, ['user_id' => auth()->id()]);
 
         $this->post(route('pinned-threads.store', $thread))->assertStatus(403);
 

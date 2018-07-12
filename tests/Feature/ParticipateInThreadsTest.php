@@ -76,7 +76,7 @@ class ParticipateInThreadsTest extends TestCase
     {
         $this->withExceptionHandling();
 
-        $reply = create(\App\Reply::classj);
+        $reply = create(\App\Reply::class);
 
         $this->patch(route('replies.update', $reply->id))
             ->assertRedirect('login');
