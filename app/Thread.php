@@ -188,7 +188,7 @@ class Thread extends Model
      */
     public function getIsSubscribedToAttribute()
     {
-        if (! auth()->id()) {
+        if (!auth()->id()) {
             return false;
         }
 
@@ -262,24 +262,13 @@ class Thread extends Model
     }
 
     /**
-     * Unset best reply from thread.
-     */
-    public function unsetBestReply()
-    {
-        if ($this->hasBestReply()) {
-            $this->bestReply()->owner->loseReputation('best_reply_awarded');
-            $this->update(['best_reply_id' => null]);
-        }
-    }
-
-    /**
-     * Determine if the thread has a current best reply.
-     *
-     * @return bool
-     */
+      * Determine if the thread has a current best reply.
+      *
+      * @return bool
+      */
     public function hasBestReply()
     {
-        return ! is_null($this->best_reply_id);
+        return !is_null($this->best_reply_id);
     }
 
     /**
