@@ -36,13 +36,13 @@ $factory->define(App\Thread::class, function ($faker) {
 
     return [
         'user_id' => function () {
-            return factory('App\User')->create()->id;
+            return factory(\App\User::class)->create()->id;
         },
         'channel_id' => function () {
-            return factory('App\Channel')->create()->id;
+            return factory(\App\Channel::class)->create()->id;
         },
         'title' => $title,
-        'body'  => $faker->paragraph,
+        'body' => $faker->paragraph,
         'visits' => 0,
         'slug' => str_slug($title),
         'locked' => false
@@ -79,23 +79,23 @@ $factory->define(App\Channel::class, function ($faker) {
 $factory->define(App\Reply::class, function ($faker) {
     return [
         'thread_id' => function () {
-            return factory('App\Thread')->create()->id;
+            return factory(\App\Thread::class)->create()->id;
         },
         'user_id' => function () {
-            return factory('App\User')->create()->id;
+            return factory(App\User::class)->create()->id;
         },
-        'body'  => $faker->paragraph
+        'body' => $faker->paragraph
     ];
 });
 
 $factory->define(\Illuminate\Notifications\DatabaseNotification::class, function ($faker) {
     return [
         'id' => \Ramsey\Uuid\Uuid::uuid4()->toString(),
-        'type' => 'App\Notifications\ThreadWasUpdated',
+        'type' => \App\Notifications\ThreadWasUpdated::class,
         'notifiable_id' => function () {
-            return auth()->id() ?: factory('App\User')->create()->id;
+            return auth()->id() ?: factory(\App\User::class)->create()->id;
         },
-        'notifiable_type' => 'App\User',
+        'notifiable_type' => \App\User::class,
         'data' => ['foo' => 'bar']
     ];
 });

@@ -13,14 +13,14 @@ class SearchTest extends TestCase
     /** @test */
     public function a_user_can_search_threads()
     {
-        if (! config('scout.algolia.id')) {
-            $this->markTestSkipped("Algolia is not configured.");
+        if (!config('scout.algolia.id')) {
+            $this->markTestSkipped('Algolia is not configured.');
         }
 
         config(['scout.driver' => 'algolia']);
 
-        create('App\Thread', [], 2);
-        create('App\Thread', ['body' => 'A thread with the foobar term.'], 2);
+        create(\App\Thread::class, [], 2);
+        create(\App\Thread::class, ['body' => 'A thread with the foobar term.'], 2);
 
         do {
             // Account for latency.

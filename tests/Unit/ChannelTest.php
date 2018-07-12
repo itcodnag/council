@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class ChannelTest extends TestCase
 {
-
     use RefreshDatabase;
 
     protected function setUp()
@@ -31,16 +30,16 @@ class ChannelTest extends TestCase
     /** @test */
     public function a_channel_consists_of_threads()
     {
-        $channel = create('App\Channel');
-        $thread = create('App\Thread', ['channel_id' => $channel->id]);
+        $channel = create(\App\Channel::class);
+        $thread = create(\App\Thread::class, ['channel_id' => $channel->id]);
 
         $this->assertTrue($channel->threads->contains($thread));
     }
 
     /** @test */
-    function a_channel_can_be_archived()
+    public function a_channel_can_be_archived()
     {
-        $channel = create('App\Channel');
+        $channel = create(\App\Channel::class);
 
         $this->assertFalse($channel->archived);
 
@@ -52,8 +51,8 @@ class ChannelTest extends TestCase
     /** @test */
     public function archived_channels_are_excluded_by_default()
     {
-        create('App\Channel');
-        create('App\Channel', ['archived' => true]);
+        create(\App\Channel::class);
+        create(\App\Channel::class, ['archived' => true]);
 
         $this->assertEquals(1, Channel::count());
     }
@@ -61,9 +60,9 @@ class ChannelTest extends TestCase
     /** @test */
     public function channels_are_sorted_alphabetically_by_default()
     {
-        $php = create('App\Channel', ['name' => 'PHP']);
-        $basic = create('App\Channel', ['name' => 'Basic']);
-        $zsh = create('App\Channel', ['name' => 'Zsh']);
+        $php = create(\App\Channel::class, ['name' => 'PHP']);
+        $basic = create(\App\Channel::class, ['name' => 'Basic']);
+        $zsh = create(\App\Channel::class, ['name' => 'Zsh']);
 
         Channel::all()->assertEquals([$basic, $php, $zsh]);
     }
