@@ -8,8 +8,7 @@
 /storage/purify
 /vendor
 /.idea
+/.vscode
 Homestead.json
 Homestead.yaml
 .env
-dump.rdb
-_ide_helper.php
