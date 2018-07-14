@@ -29,6 +29,6 @@ class ProfilesController extends Controller
 
     public function index(User $user)
     {
-        return ['activites' => Activity::paginatedFeed($user)->paginate(2)];
+        return ['activites' => Activity::paginatedFeed($user)->paginate(30)];
     }
 }
