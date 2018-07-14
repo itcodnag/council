@@ -99,7 +99,7 @@ class Reply extends Model
      */
     public function path()
     {
-        return $this->thread->path()."#reply-{$this->id}";
+        return $this->thread->path() . "#reply-{$this->id}";
     }
 
     /**
@@ -145,5 +145,14 @@ class Reply extends Model
     public function getIsBestAttribute()
     {
         return $this->isBest();
+    }
+
+    public function getXp()
+    {
+        $xp = $this->isBest() ? config('council.reputation.best_reply_awarded') : 0;
+        $xp += config('council.reputation.reply_posted');
+        $xp += $this->favorites()->count() * config('council.reputation.reply_favorited');
+
+        return $xp;
     }
 }
