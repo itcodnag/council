@@ -28,7 +28,7 @@ class Reply extends Model
      *
      * @var array
      */
-    protected $appends = ['favoritesCount', 'isFavorited', 'isBest'];
+    protected $appends = ['favoritesCount', 'isFavorited', 'isBest', 'xp'];
 
     /**
      * Boot the reply instance.
@@ -99,7 +99,7 @@ class Reply extends Model
      */
     public function path()
     {
-        return $this->thread->path()."#reply-{$this->id}";
+        return $this->thread->path() . "#reply-{$this->id}";
     }
 
     /**
@@ -147,7 +147,7 @@ class Reply extends Model
         return $this->isBest();
     }
 
-    public function getXp()
+    public function getXpAttribute()
     {
         $xp = $this->isBest() ? config('council.reputation.best_reply_awarded') : 0;
         $xp += config('council.reputation.reply_posted');
