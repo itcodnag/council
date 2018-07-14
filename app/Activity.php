@@ -13,29 +13,39 @@ class Activity extends Model
      */
     protected $guarded = [];
 
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
     protected $appends = ['favoritedModel'];
 
+    /**
+     * Fetch the associated subject for the activity.
+     *
+     * @return \Illiminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function subject()
+    {
+        return $this->morphTo();
+    }
+
+    /**
+     * Fetch the model record for the subject of the favorite.
+     */
     public function getFavoritedModelAttribute()
     {
         $favoritedModel = null;
+
         if ($this->subject_type === Favorite::class) {
             $subject = $this->subject()->firstOrFail();
+
             if ($subject->favorited_type == Reply::class) {
                 $favoritedModel = Reply::find($subject->favorited_id);
             }
         }
 
         return $favoritedModel;
-    }
-
-    /**
-     * Fetch the associated subject for the activity.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
-     */
-    public function subject()
-    {
-        return $this->morphTo();
     }
 
     /**

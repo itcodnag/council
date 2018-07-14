@@ -28,6 +28,11 @@ class Thread extends Model
     protected $with = ['creator', 'channel'];
 
     /**
+     * The accessors to append to the model's array form.
+     */
+    protected $appends = ['path'];
+
+    /**
      * The attributes that should be cast to native types.
      *
      * @var array
@@ -67,6 +72,18 @@ class Thread extends Model
     public function path()
     {
         return "/threads/{$this->channel->slug}/{$this->slug}";
+    }
+
+    /**
+     * Fetch the path to the thread as a property.
+     */
+    public function getPathAttribute()
+    {
+        if (!$this->channel) {
+            return '';
+        }
+
+        return $this->path();
     }
 
     /**
@@ -188,7 +205,7 @@ class Thread extends Model
      */
     public function getIsSubscribedToAttribute()
     {
-        if (! auth()->id()) {
+        if (!auth()->id()) {
             return false;
         }
 
@@ -268,7 +285,7 @@ class Thread extends Model
      */
     public function hasBestReply()
     {
-        return ! is_null($this->best_reply_id);
+        return !is_null($this->best_reply_id);
     }
 
     /**
