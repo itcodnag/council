@@ -30,32 +30,32 @@
 </head>
 
 <body class="font-sans bg-grey-lighter h-full">
-<div id="app" class="flex flex-col h-full">
-    @include ('layouts.nav')
+    <div id="app" class="flex flex-col h-full">
+        @include ('layouts.nav')
 
-    <div class="container mx-auto flex flex-1">
-        <div class="flex flex-1">
-            @section('sidebar')
-                @include('sidebar')
-            @show
+        <div class="container mx-auto flex flex-1">
+            <div class="flex flex-1">
+                @section('sidebar')
+                    @include('sidebar')
+                @show
 
-            <div class="px-10 bg-white flex-1">
-                @yield('content')
+                <div class="px-10 bg-white flex-1">
+                    @yield('content')
+                </div>
+
+                 @include('channels-sidebar')
             </div>
+        </div>
 
-            @include('channels-sidebar')
+        <flash message="{{ session('flash') }}"></flash>
+
+        <div v-cloak>
+            @include('modals.all')
         </div>
     </div>
 
-    <flash message="{{ session('flash') }}"></flash>
-
-    <div v-cloak>
-        @include('modals.all')
-    </div>
-</div>
-
-<!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
-@yield('scripts')
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>
