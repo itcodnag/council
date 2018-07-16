@@ -47,6 +47,7 @@ class ChannelAdministrationTest extends TestCase
         $response = $this->createChannel([
             'name' => 'php',
             'description' => 'This is the channel for discussing all things PHP.',
+            'color' => '#FF0000',
         ]);
 
         $this->get($response->headers->get('Location'))
@@ -64,6 +65,7 @@ class ChannelAdministrationTest extends TestCase
             $updatedChannel = [
                 'name' => 'altered',
                 'description' => 'altered channel description',
+                'color' => '#00f00',
                 'archived' => true
             ]
         );
@@ -87,6 +89,7 @@ class ChannelAdministrationTest extends TestCase
             [
                 'name' => 'altered',
                 'description' => 'altered channel description',
+                'color' => '#000000',
                 'archived' => true
             ]
         );
@@ -133,6 +136,7 @@ class ChannelAdministrationTest extends TestCase
             [
                 'name' => 'altered',
                 'description' => 'altered channel description',
+                'color' => '#000000',
                 'archived' => false
             ]
         );
@@ -152,6 +156,13 @@ class ChannelAdministrationTest extends TestCase
     {
         $this->createChannel(['description' => null])
             ->assertSessionHasErrors('description');
+    }
+
+    /** @test */
+    public function a_channel_requires_a_color()
+    {
+        $this->createChannel(['color' => null])
+            ->assertSessionHasErrors('color');
     }
 
     protected function createChannel($overrides = [])
