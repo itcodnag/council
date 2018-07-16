@@ -53,9 +53,10 @@
             </li>
 
             <li>
-                <a href="/leaderboard" class="flex items-center text-grey-darkest hover:text-blue hover:font-bold {{ request()->getPathInfo() === '/leaderboard' ? 'text-blue font-bold' : '' }}"></a>
-                @include ('svgs.icons.leaderboard')
-                leaderboard
+                <a href="/leaderboard" class="flex items-center text-grey-darkest hover:text-blue hover:font-bold {{ request()->getPathInfo() === '/leaderboard' ? 'text-blue font-bold' : '' }}">
+                    @include ('svgs.icons.leaderboard')
+                    Leaderboard
+                </a>
             </li>
         </ul>
     </div>
