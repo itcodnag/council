@@ -55,7 +55,7 @@ class SampleDataSeeder extends Seeder
             ],
             [
                 'name' => 'Vuex',
-                'description' => 'This channel is for all Vuex specific questions.',
+                'description' => 'This channel is for all Vuex related questions.',
                 'color' => '#ff8822'
             ],
         ])->each(function ($channel) {

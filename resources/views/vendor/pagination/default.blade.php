@@ -1,12 +1,11 @@
 @if ($paginator->hasPages())
     <div class="text-center">
-        <ul class="inline-flex w-48 list-reset border py-2 my-4 rounded">
+        <ul class="inline-flex w-48 list-reset border py-2 mt-4 mb-8 rounded">
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
                 <li class="disabled flex-1 border-r"><span>&laquo;</span></li>
             @else
-                <li class="flex-1 border-r"><a href="{{ $paginator->previousPageUrl() }}" rel="prev"
-                                               class="text-blue font-bold">&laquo;</a></li>
+                <li class="flex-1 border-r"><a href="{{ $paginator->previousPageUrl() }}" rel="prev" class="text-blue font-bold">&laquo;</a></li>
             @endif
 
             {{-- Pagination Elements --}}
@@ -22,8 +21,7 @@
                         @if ($page == $paginator->currentPage())
                             <li class="active flex-1 font-bold border-r"><span>{{ $page }}</span></li>
                         @else
-                            <li class="flex-1 font-bold border-r"><a href="{{ $url }}" class="text-blue">{{ $page }}</a>
-                            </li>
+                            <li class="flex-1 font-bold border-r"><a href="{{ $url }}" class="text-blue">{{ $page }}</a></li>
                         @endif
                     @endforeach
                 @endif
@@ -31,11 +29,10 @@
 
             {{-- Next Page Link --}}
             @if ($paginator->hasMorePages())
-                <li class="flex-1"><a href="{{ $paginator->nextPageUrl() }}" rel="next" class="text-blue font-bold">&raquo;</a>
-                </li>
+                <li class="flex-1"><a href="{{ $paginator->nextPageUrl() }}" rel="next" class="text-blue font-bold">&raquo;</a></li>
             @else
                 <li class="disabled flex-1"><span>&raquo;</span></li>
             @endif
-        </ul>
+    </ul>
     </div>
 @endif

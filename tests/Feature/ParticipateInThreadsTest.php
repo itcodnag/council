@@ -10,7 +10,7 @@ class ParticipateInThreadsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function unauthenticated_users_may_not_add_replies()
+    function unauthenticated_users_may_not_add_replies()
     {
         $this->withExceptionHandling()
             ->post('/threads/some-channel/1/replies', [])
@@ -18,7 +18,7 @@ class ParticipateInThreadsTest extends TestCase
     }
 
     /** @test */
-    public function an_authenticated_user_may_participate_in_forum_threads()
+    function an_authenticated_user_may_participate_in_forum_threads()
     {
         $this->signIn();
 
@@ -32,7 +32,7 @@ class ParticipateInThreadsTest extends TestCase
     }
 
     /** @test */
-    public function a_reply_requires_a_body()
+    function a_reply_requires_a_body()
     {
         $this->withExceptionHandling()->signIn();
 
@@ -44,7 +44,7 @@ class ParticipateInThreadsTest extends TestCase
     }
 
     /** @test */
-    public function unauthorized_users_cannot_delete_replies()
+    function unauthorized_users_cannot_delete_replies()
     {
         $this->withExceptionHandling();
 
@@ -59,7 +59,7 @@ class ParticipateInThreadsTest extends TestCase
     }
 
     /** @test */
-    public function authorized_users_can_delete_replies()
+    function authorized_users_can_delete_replies()
     {
         $this->signIn();
         $reply = create(\App\Reply::class, ['user_id' => auth()->id()]);
@@ -72,7 +72,7 @@ class ParticipateInThreadsTest extends TestCase
     }
 
     /** @test */
-    public function unauthorized_users_cannot_update_replies()
+    function unauthorized_users_cannot_update_replies()
     {
         $this->withExceptionHandling();
 
@@ -87,7 +87,7 @@ class ParticipateInThreadsTest extends TestCase
     }
 
     /** @test */
-    public function authorized_users_can_update_replies()
+    function authorized_users_can_update_replies()
     {
         $this->signIn();
 
@@ -100,7 +100,7 @@ class ParticipateInThreadsTest extends TestCase
     }
 
     /** @test */
-    public function replies_that_contain_spam_may_not_be_created()
+    function replies_that_contain_spam_may_not_be_created()
     {
         $this->withExceptionHandling();
 
@@ -116,7 +116,7 @@ class ParticipateInThreadsTest extends TestCase
     }
 
     /** @test */
-    public function users_may_only_reply_a_maximum_of_once_per_minute()
+    function users_may_only_reply_a_maximum_of_once_per_minute()
     {
         $this->withExceptionHandling();
 

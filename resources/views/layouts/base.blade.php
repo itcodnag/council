@@ -28,20 +28,20 @@
 </head>
 
 <body class="font-sans bg-white">
-<div id="app">
-    @include ('layouts.nav')
+    <div id="app">
+        @include ('layouts.nav')
 
-    <div class="container">
-        <div class="flex">
-            @yield('content')
+        <div class="container">
+            <div class="flex">
+                @yield('content')
+            </div>
         </div>
+
+        <flash message="{{ session('flash') }}"></flash>
     </div>
 
-    <flash message="{{ session('flash') }}"></flash>
-</div>
-
-<!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
-@yield('scripts')
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>

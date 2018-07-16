@@ -27,7 +27,7 @@ Vue.use(VModal);
 
 let authorizations = require('./authorizations');
 
-Vue.prototype.authorize = function (...params) {
+Vue.prototype.authorize = function(...params) {
     if (!window.App.signedIn) return false;
 
     if (typeof params[0] === 'string') {

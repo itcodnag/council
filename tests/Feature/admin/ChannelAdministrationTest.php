@@ -65,7 +65,7 @@ class ChannelAdministrationTest extends TestCase
             $updatedChannel = [
                 'name' => 'altered',
                 'description' => 'altered channel description',
-                'color' => '#00f00',
+                'color' => '#00ff00',
                 'archived' => true
             ]
         );
@@ -101,7 +101,6 @@ class ChannelAdministrationTest extends TestCase
     public function the_path_to_a_thread_is_unaffected_by_its_channels_archived_status()
     {
         $thread = create(\App\Thread::class);
-
         $path = $thread->path();
 
         $thread->channel->archive();

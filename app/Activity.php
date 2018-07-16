@@ -23,7 +23,7 @@ class Activity extends Model
     /**
      * Fetch the associated subject for the activity.
      *
-     * @return \Illiminate\Database\Eloquent\Relations\MorphTo
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function subject()
     {

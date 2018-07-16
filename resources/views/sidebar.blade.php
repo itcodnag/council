@@ -58,7 +58,9 @@
                     Leaderboard
                 </a>
             </li>
+
         </ul>
+
     </div>
 
     @if (count($trending))

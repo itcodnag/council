@@ -11,7 +11,7 @@ class LockThreadsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function non_administrators_may_not_lock_threads()
+    function non_administrators_may_not_lock_threads()
     {
         $this->withExceptionHandling();
 
@@ -25,7 +25,7 @@ class LockThreadsTest extends TestCase
     }
 
     /** @test */
-    public function administrators_can_lock_threads()
+    function administrators_can_lock_threads()
     {
         $this->signInAdmin();
 
@@ -37,7 +37,7 @@ class LockThreadsTest extends TestCase
     }
 
     /** @test */
-    public function administrators_can_unlock_threads()
+    function administrators_can_unlock_threads()
     {
         $this->signInAdmin();
 

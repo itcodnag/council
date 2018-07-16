@@ -21,6 +21,7 @@ class User extends Authenticatable
         'password',
         'avatar_path'
     ];
+
     /**
      * The accessors to append to the model's array form.
      *

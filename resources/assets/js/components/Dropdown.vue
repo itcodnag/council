@@ -22,6 +22,6 @@
 import activation from '../mixins/activation';
 
 export default {
-    mixins: [ activation ],
-}
+    mixins: [activation]
+};
 </script>

@@ -32,7 +32,7 @@ class CreateThreadsTest extends TestCase
     }
 
     /** @test */
-    public function new_users_must_first_confirm_their_email_address_before_creating_threads()
+    function new_users_must_first_confirm_their_email_address_before_creating_threads()
     {
         $user = factory(\App\User::class)->states('unconfirmed')->create();
 
@@ -46,7 +46,7 @@ class CreateThreadsTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_create_new_forum_threads()
+    function a_user_can_create_new_forum_threads()
     {
         $response = $this->publishThread(['title' => 'Some Title', 'body' => 'Some body.']);
 
@@ -56,24 +56,24 @@ class CreateThreadsTest extends TestCase
     }
 
     /** @test */
-    public function a_thread_requires_a_title()
+    function a_thread_requires_a_title()
     {
         $this->publishThread(['title' => null])
             ->assertSessionHasErrors('title');
     }
 
     /** @test */
-    public function a_thread_requires_a_body()
+    function a_thread_requires_a_body()
     {
         $this->publishThread(['body' => null])
             ->assertSessionHasErrors('body');
     }
 
     /** @test */
-    public function a_thread_requires_recaptcha_verification()
+    function a_thread_requires_recaptcha_verification()
     {
         if (Recaptcha::isInTestMode()) {
-            $this->markTestSkipped('Recaptcha is in test mode.');
+            $this->markTestSkipped("Recaptcha is in test mode.");
         }
 
         unset(app()[Recaptcha::class]);
@@ -83,7 +83,7 @@ class CreateThreadsTest extends TestCase
     }
 
     /** @test */
-    public function a_thread_requires_a_valid_channel()
+    function a_thread_requires_a_valid_channel()
     {
         factory(\App\Channel::class, 2)->create();
 
@@ -95,7 +95,7 @@ class CreateThreadsTest extends TestCase
     }
 
     /** @test */
-    public function a_thread_requires_a_unique_slug()
+    function a_thread_requires_a_unique_slug()
     {
         $this->signIn();
 
@@ -109,7 +109,7 @@ class CreateThreadsTest extends TestCase
     }
 
     /** @test */
-    public function a_thread_with_a_title_that_ends_in_a_number_should_generate_the_proper_slug()
+    function a_thread_with_a_title_that_ends_in_a_number_should_generate_the_proper_slug()
     {
         $this->signIn();
 
@@ -121,7 +121,7 @@ class CreateThreadsTest extends TestCase
     }
 
     /** @test */
-    public function unauthorized_users_may_not_delete_threads()
+    function unauthorized_users_may_not_delete_threads()
     {
         $this->withExceptionHandling();
 
@@ -134,7 +134,7 @@ class CreateThreadsTest extends TestCase
     }
 
     /** @test */
-    public function authorized_users_can_delete_threads()
+    function authorized_users_can_delete_threads()
     {
         $this->signIn();
 
@@ -154,18 +154,12 @@ class CreateThreadsTest extends TestCase
     /** @test */
     public function a_new_thread_cannot_be_created_in_an_archived_channel()
     {
-        $channel = factory(\App\Channel::class)->create();
-
-        $response = $this->publishThread(['title' => 'Some Title', 'body' => 'Some body.']);
-
-        $this->get($response->headers->get('Location'))
-            ->assertSee('Some Title')
-            ->assertSee('Some body.');
-
-        $channel->archive();
+        $channel = factory(\App\Channel::class)->create(['archived' => true]);
 
         $this->publishThread(['channel_id' => $channel->id])
             ->assertSessionHasErrors('channel_id');
+
+        $this->assertCount(0, $channel->threads);
     }
 
     protected function publishThread($overrides = [])

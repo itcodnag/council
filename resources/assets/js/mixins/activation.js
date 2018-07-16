@@ -2,27 +2,25 @@ export default {
     data() {
         return {
             active: false,
-            timer: null, 
+            timer: null
         };
     },
 
     methods: {
         activate() {
-            window.clearTimeout( this.timer );
+            window.clearTimeout(this.timer);
 
-            this.timer = window.setTimeout( () => {
+            this.timer = window.setTimeout(() => {
                 this.active = true;
-            }, 100 );
-
+            }, 100);
         },
 
         deactivate() {
-            window.clearTimeout( this.timer );
+            window.clearTimeout(this.timer);
 
-            this.timer = window.setTimeout( () => {
+            this.timer = window.setTimeout(() => {
                 this.active = false;
-            }, 100 );
-
+            }, 100);
         }
     }
 };

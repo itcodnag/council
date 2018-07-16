@@ -12,7 +12,7 @@ class ReplyTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function it_has_an_owner()
+    function it_has_an_owner()
     {
         $reply = create(\App\Reply::class);
 
@@ -20,7 +20,7 @@ class ReplyTest extends TestCase
     }
 
     /** @test */
-    public function it_knows_if_it_was_just_published()
+    function it_knows_if_it_was_just_published()
     {
         $reply = create(\App\Reply::class);
 
@@ -32,7 +32,7 @@ class ReplyTest extends TestCase
     }
 
     /** @test */
-    public function it_wraps_mentioned_usernames_in_the_body_within_anchor_tags()
+    function it_wraps_mentioned_usernames_in_the_body_within_anchor_tags()
     {
         $reply = new Reply([
             'body' => 'Hello @Jane-Doe.'
@@ -45,7 +45,7 @@ class ReplyTest extends TestCase
     }
 
     /** @test */
-    public function it_knows_if_it_is_the_best_reply()
+    function it_knows_if_it_is_the_best_reply()
     {
         $reply = create(\App\Reply::class);
 
@@ -57,19 +57,19 @@ class ReplyTest extends TestCase
     }
 
     /** @test */
-    public function a_reply_body_is_sanitized_automatically()
+    function a_reply_body_is_sanitized_automatically()
     {
         $reply = make(\App\Reply::class, ['body' => '<script>alert("bad")</script><p>This is okay.</p>']);
 
-        $this->assertEquals('<p>This is okay.</p>', $reply->body);
+        $this->assertEquals("<p>This is okay.</p>", $reply->body);
     }
 
     /** @test */
-    public function a_reply_knows_the_total_xp_earned()
+    function a_reply_knows_the_total_xp_earned()
     {
         $this->signIn();
 
-        $reply = create('App\Reply'); // 2points for creating the reply.
+        $reply = create('App\Reply'); // 2 points for creating the reply.
 
         $this->assertEquals(2, $reply->xp);
 

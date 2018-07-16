@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <div v-html="content" ref="content"></div>
-    </div>
+  <div>
+      <div v-html="content" ref="content"></div>
+  </div>
 </template>
 
 <script>
@@ -11,13 +11,13 @@
     export default {
         props: ['content'],
 
-        mounted() {
+        mounted () {
             this.highlight(this.$refs.content);
         },
 
         methods: {
             highlight(block) {
-                if (!block) return;
+                if (! block) return;
 
                 block.querySelectorAll('pre').forEach(
                     node => Highlighter.highlightBlock(node)

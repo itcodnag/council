@@ -25,7 +25,7 @@ class InstallCommandTest extends TestCase
     }
 
     /** @test */
-    public function it_creates_the_example_file()
+    function it_creates_the_example_file()
     {
         $this->assertFileNotExists('.env');
 
@@ -35,7 +35,7 @@ class InstallCommandTest extends TestCase
     }
 
     /** @test */
-    public function it_generates_an_app_key()
+    function it_generates_an_app_key()
     {
         $key = 'APP_KEY';
 
@@ -45,7 +45,7 @@ class InstallCommandTest extends TestCase
     }
 
     /** @test */
-    public function it_optionally_migrates_the_database()
+    function it_optionally_migrates_the_database()
     {
         $this->partialMock(['confirm', 'call'], function ($mock) {
             $mock->shouldReceive('confirm')->once()->andReturn(true);
@@ -58,7 +58,7 @@ class InstallCommandTest extends TestCase
     }
 
     /** @test */
-    public function it_sets_the_database_env_config()
+    function it_sets_the_database_env_config()
     {
         $this->partialMock(['ask', 'askHiddenWithDefault'], function ($mock) {
             $mock->shouldReceive('ask')->with('Database name')->andReturn('mydatabase');

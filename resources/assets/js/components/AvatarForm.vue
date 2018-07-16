@@ -4,7 +4,7 @@
             <img :src="avatar" width="50" height="50" class="mr-1">
 
             <h1>
-                {{user.username}}
+                {{ user.username }}
                 <small v-text="reputation"></small>
             </h1>
         </div>

@@ -77,7 +77,7 @@ class ChannelsController extends Controller
             request()->validate([
                 'name' => 'required|unique:channels',
                 'color' => 'required',
-                'description' => 'required'
+                'description' => 'required',
             ])
         );
 

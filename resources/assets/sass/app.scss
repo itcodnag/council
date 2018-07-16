@@ -11,27 +11,27 @@
 @tailwind utilities;
 
 a {
-  @apply .text-grey-darkest;
-  text-decoration: none;
+    @apply .text-grey-darkest;
+    text-decoration: none;
 
-  &.link:hover {
-    text-decoration: underline;
-  }
+    &.link:hover {
+        text-decoration: underline;
+    }
 }
 
 input {
-  @apply .border .border-grey-light;
+    @apply .border .border-grey-light;
 }
 
 pre {
-  @apply .whitespace-pre-wrap;
+    @apply .whitespace-pre-wrap;
 }
 
 [v-cloak] {
-  display: none;
+    display: none;
 }
 
 .ais-highlight > em {
-  font-weight: bold;
-  @apply .text-black;
+    font-weight: bold;
+    @apply .text-black;
 }

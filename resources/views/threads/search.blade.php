@@ -2,10 +2,10 @@
 
 @section('content')
     <ais-index
-            app-id="{{ config('scout.algolia.id') }}"
-            api-key="{{ config('scout.algolia.key') }}"
-            index-name="threads"
-            query="{{ request('q') }}"
+        app-id="{{ config('scout.algolia.id') }}"
+        api-key="{{ config('scout.algolia.key') }}"
+        index-name="threads"
+        query="{{ request('q') }}"
     >
         @include('breadcrumbs')
 

@@ -3,27 +3,27 @@
 </template>
 
 <script>
-    export default {
-        props: ["active"],
+export default {
+    props: ["active"],
 
-        data() {
-            return {
-                isActive: this.active
-            };
-        },
+    data() {
+        return {
+            isActive: this.active
+        };
+    },
 
-        methods: {
-            subscribe() {
-                axios[this.isActive ? "delete" : "post"](
-                    location.pathname + "/subscriptions"
-                );
+    methods: {
+        subscribe() {
+            axios[this.isActive ? "delete" : "post"](
+                location.pathname + "/subscriptions"
+            );
 
-                this.isActive = !this.isActive;
+            this.isActive = !this.isActive;
 
-                if (this.isActive) {
-                    flash("Okay, we'll notify you when this thread is updated!");
-                }
+            if (this.isActive) {
+                flash("Okay, we'll notify you when this thread is updated!");
             }
         }
-    };
+    }
+};
 </script>

@@ -10,7 +10,7 @@ class FavoritesTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function guests_can_not_favorite_anything()
+    function guests_can_not_favorite_anything()
     {
         $this->withExceptionHandling()
             ->post('replies/1/favorites')
@@ -44,7 +44,7 @@ class FavoritesTest extends TestCase
     }
 
     /** @test */
-    public function an_authenticated_user_may_only_favorite_a_reply_once()
+    function an_authenticated_user_may_only_favorite_a_reply_once()
     {
         $this->signIn();
 

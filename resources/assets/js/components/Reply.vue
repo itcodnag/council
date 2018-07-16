@@ -67,81 +67,82 @@
 </template>
 
 <script>
-    import Favorite from "./Favorite.vue";
-    import Highlight from "./Highlight.vue";
-    import moment from "moment";
+import Favorite from "./Favorite.vue";
+import Highlight from "./Highlight.vue";
+import moment from "moment";
 
-    export default {
-        props: ["reply"],
+export default {
+    props: ["reply"],
 
-        components: { Favorite, Highlight },
+    components: { Favorite, Highlight },
 
-        data() {
-            return {
-                editing: false,
-                id: this.reply.id,
-                body: this.reply.body,
-                isBest: this.reply.isBest
-            };
+    data() {
+        return {
+            editing: false,
+            id: this.reply.id,
+            body: this.reply.body,
+            isBest: this.reply.isBest
+        };
+    },
+
+    computed: {
+        ago() {
+            return moment(this.reply.created_at).fromNow() + "...";
         },
 
-        computed: {
-            ago() {
-                return moment(this.reply.created_at).fromNow() + "...";
-            },
+        bestReplyClasses() {
+            let classes = [this.isBest ? "text-green" : "text-grey-light"];
 
-            bestReplyClasses() {
-                let classes = [this.isBest ? "text-green" : "text-grey-light"];
-
-                if (!this.authorize("owns", this.reply.thread)) {
-                    classes.push("cursor-auto");
-                }
-
-                return classes;
+            if (!this.authorize("owns", this.reply.thread)) {
+                classes.push("cursor-auto");
             }
-        },
 
-        created() {
-            window.events.$on("best-reply-selected", id => {
-                this.isBest = id === this.id;
-            });
-        },
-
-        methods: {
-            update() {
-                axios
-                    .patch("/replies/" + this.id, {
-                        body: this.body
-                    })
-                    .catch(error => {
-                        flash(error.response.data, "danger");
-                    });
-                this.editing = false;
-
-                flash("Updated!");
-            },
-
-            cancel() {
-                this.editing = false;
-
-                this.body = this.reply.body;
-            },
-
-            destroy() {
-                axios.delete("/replies/" + this.id);
-
-                this.$emit("deleted", this.id);
-            },
-
-            markBestReply() {
-                if (!this.authorize("owns", this.reply.thread)) {
-                    return;
-                }
-
-                axios.post("/replies/" + this.id + "/best");
-
-                window.events.$emit("best-reply-selected", this.id);
-            }
+            return classes;
         }
-    };
+    },
+
+    created() {
+        window.events.$on("best-reply-selected", id => {
+            this.isBest = id === this.id;
+        });
+    },
+
+    methods: {
+        update() {
+            axios
+                .patch("/replies/" + this.id, {
+                    body: this.body
+                })
+                .catch(error => {
+                    flash(error.response.data, "danger");
+                });
+
+            this.editing = false;
+
+            flash("Updated!");
+        },
+
+        cancel() {
+            this.editing = false;
+
+            this.body = this.reply.body;
+        },
+
+        destroy() {
+            axios.delete("/replies/" + this.id);
+
+            this.$emit("deleted", this.id);
+        },
+
+        markBestReply() {
+            if (!this.authorize("owns", this.reply.thread)) {
+                return;
+            }
+
+            axios.post("/replies/" + this.id + "/best");
+
+            window.events.$emit("best-reply-selected", this.id);
+        }
+    }
+};
 </script>

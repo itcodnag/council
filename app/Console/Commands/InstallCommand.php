@@ -13,6 +13,7 @@ class InstallCommand extends Command
      * @var string
      */
     protected $signature = 'council:install';
+
     /**
      * The console command description.
      *
@@ -34,15 +35,15 @@ class InstallCommand extends Command
         if (strlen(config('app.key')) === 0) {
             $this->call('key:generate');
 
-            $this->line('~ Secret key property generated');
+            $this->line('~ Secret key properly generated.');
         }
 
-        $creadentials = $this->requestDatabaseCredentials();
+        $credentials = $this->requestDatabaseCredentials();
 
-        $this->updateEnvironmentFile($creadentials);
+        $this->updateEnvironmentFile($credentials);
 
         if ($this->confirm('Do you want to migrate the database?', false)) {
-            $this->migrateDatabaseWithFreshCredentials($creadentials);
+            $this->migrateDatabaseWithFreshCredentials($credentials);
 
             $this->line('~ Database successfully migrated.');
         }
@@ -55,7 +56,7 @@ class InstallCommand extends Command
     /**
      * Update the .env file from an array of $key => $value pairs.
      *
-     * @param array $updatedValues
+     * @param  array $updatedValues
      * @return void
      */
     protected function updateEnvironmentFile($updatedValues)
@@ -72,11 +73,11 @@ class InstallCommand extends Command
     }
 
     /**
-     *Display the welcome message.
+     * Display the welcome message.
      */
     protected function welcome()
     {
-        $this->info('>> Welcome to the Council installation process <<');
+        $this->info('>> Welcome to the Council installation process! <<');
     }
 
     /**
@@ -98,7 +99,7 @@ class InstallCommand extends Command
             'DB_DATABASE' => $this->ask('Database name'),
             'DB_PORT' => $this->ask('Database port', 3306),
             'DB_USERNAME' => $this->ask('Database user'),
-            'DB_PASSWORD' => $this->askHiddenWithDefault('Database password (leave blank for no password)')
+            'DB_PASSWORD' => $this->askHiddenWithDefault('Database password (leave blank for no password)'),
         ];
     }
 
@@ -140,8 +141,8 @@ class InstallCommand extends Command
     /**
      * Prompt the user for optional input but hide the answer from the console.
      *
-     * @param  string $question
-     * @param  bool $fallback
+     * @param  string  $question
+     * @param  bool    $fallback
      * @return string
      */
     public function askHiddenWithDefault($question, $fallback = true)

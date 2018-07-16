@@ -26,14 +26,14 @@ class ReadThreadsTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_read_a_single_thread()
+    function a_user_can_read_a_single_thread()
     {
         $this->get($this->thread->path())
             ->assertSee($this->thread->title);
     }
 
     /** @test */
-    public function a_user_can_filter_threads_according_to_a_channel()
+    function a_user_can_filter_threads_according_to_a_channel()
     {
         $channel = create(\App\Channel::class);
         $threadInChannel = create(\App\Thread::class, ['channel_id' => $channel->id]);
@@ -45,7 +45,7 @@ class ReadThreadsTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_filter_threads_by_any_username()
+    function a_user_can_filter_threads_by_any_username()
     {
         $this->signIn(create(\App\User::class, ['username' => 'JohnDoe']));
 
@@ -58,7 +58,7 @@ class ReadThreadsTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_filter_threads_by_popularity()
+    function a_user_can_filter_threads_by_popularity()
     {
         $threadWithTwoReplies = create(\App\Thread::class);
         create(\App\Reply::class, ['thread_id' => $threadWithTwoReplies->id], 2);
@@ -74,7 +74,7 @@ class ReadThreadsTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_filter_threads_by_those_that_are_unanswered()
+    function a_user_can_filter_threads_by_those_that_are_unanswered()
     {
         $thread = create(\App\Thread::class);
         create(\App\Reply::class, ['thread_id' => $thread->id]);
@@ -85,7 +85,7 @@ class ReadThreadsTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_request_all_replies_for_a_given_thread()
+    function a_user_can_request_all_replies_for_a_given_thread()
     {
         $thread = create(\App\Thread::class);
         create(\App\Reply::class, ['thread_id' => $thread->id], 2);
@@ -97,7 +97,7 @@ class ReadThreadsTest extends TestCase
     }
 
     /** @test */
-    public function we_record_a_new_visit_each_time_the_thread_is_read()
+    function we_record_a_new_visit_each_time_the_thread_is_read()
     {
         $thread = create(\App\Thread::class);
 

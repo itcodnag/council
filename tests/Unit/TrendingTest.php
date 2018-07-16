@@ -17,7 +17,6 @@ class TrendingTest extends TestCase
         parent::setUp();
 
         $this->trending = new Trending();
-
         $this->trending->reset();
     }
 
@@ -50,7 +49,7 @@ class TrendingTest extends TestCase
         $this->trending->push($thread5, 5);
         $this->trending->push($thread6, 6);
 
-        tap($this->trending->get(), function ($trending) use ($thread1, $thread2, $thread3, $thread4, $thread5, $thread6) {
+        tap($this->trending->get(), function($trending) use ($thread1, $thread2, $thread3, $thread4, $thread5, $thread6) {
             $this->assertCount(5, $trending);
             $this->assertEquals($thread6->path(), $trending[0]->path);
             $this->assertEquals($thread5->path(), $trending[1]->path);
@@ -61,8 +60,7 @@ class TrendingTest extends TestCase
     }
 
     /** @test */
-    public function it_returns_an_empty_list_when_there_are_no_trending_topics()
-    {
+    public function it_returns_an_empty_list_when_there_are_no_trending_topics() {
         $this->assertCount(0, $this->trending->get());
     }
 }

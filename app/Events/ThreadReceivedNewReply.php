@@ -28,7 +28,6 @@ class ThreadReceivedNewReply
 
     /**
      * Get the subject of the event.
-     * @return \App\Reply
      */
     public function subject()
     {

@@ -14,7 +14,7 @@ class Channel extends Model
     protected $guarded = [];
 
     /**
-     * Attribute to cast.
+     * Attributes to cast.
      */
     protected $casts = [
         'archived' => 'boolean'
@@ -76,7 +76,7 @@ class Channel extends Model
     }
 
     /**
-     *  Get a new query builder that includes archives.
+     * Get a new query builder that includes archives.
      */
     public static function withArchived()
     {

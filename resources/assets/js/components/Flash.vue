@@ -22,9 +22,11 @@
         computed: {
             classes() {
                 let defaults = ['fixed', 'p-4', 'border', 'text-white'];
+
                 if (this.level === 'success') defaults.push('bg-green', 'border-green-dark');
                 if (this.level === 'warning') defaults.push('bg-yellow', 'border-yellow-dark');
                 if (this.level === 'danger') defaults.push('bg-red', 'border-red-dark');
+
                 return defaults;
             }
         },
