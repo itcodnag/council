@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Illuminate\Http\Response;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ParticipateInThreadsTest extends TestCase
@@ -10,7 +11,7 @@ class ParticipateInThreadsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function unauthenticated_users_may_not_add_replies()
+    public function unauthenticated_users_may_not_add_replies()
     {
         $this->withExceptionHandling()
             ->post('/threads/some-channel/1/replies', [])
@@ -18,7 +19,7 @@ class ParticipateInThreadsTest extends TestCase
     }
 
     /** @test */
-    function an_authenticated_user_may_participate_in_forum_threads()
+    public function an_authenticated_user_may_participate_in_forum_threads()
     {
         $this->signIn();
 
@@ -32,7 +33,7 @@ class ParticipateInThreadsTest extends TestCase
     }
 
     /** @test */
-    function a_reply_requires_a_body()
+    public function a_reply_requires_a_body()
     {
         $this->withExceptionHandling()->signIn();
 
@@ -44,7 +45,7 @@ class ParticipateInThreadsTest extends TestCase
     }
 
     /** @test */
-    function unauthorized_users_cannot_delete_replies()
+    public function unauthorized_users_cannot_delete_replies()
     {
         $this->withExceptionHandling();
 
@@ -55,16 +56,16 @@ class ParticipateInThreadsTest extends TestCase
 
         $this->signIn()
             ->delete("/replies/{$reply->id}")
-            ->assertStatus(403);
+            ->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
     /** @test */
-    function authorized_users_can_delete_replies()
+    public function authorized_users_can_delete_replies()
     {
         $this->signIn();
         $reply = create(\App\Reply::class, ['user_id' => auth()->id()]);
 
-        $this->delete("/replies/{$reply->id}")->assertStatus(302);
+        $this->delete("/replies/{$reply->id}")->assertStatus(Response::HTTP_FOUND);
 
         $this->assertDatabaseMissing('replies', ['id' => $reply->id]);
 
@@ -72,7 +73,7 @@ class ParticipateInThreadsTest extends TestCase
     }
 
     /** @test */
-    function unauthorized_users_cannot_update_replies()
+    public function unauthorized_users_cannot_update_replies()
     {
         $this->withExceptionHandling();
 
@@ -83,11 +84,11 @@ class ParticipateInThreadsTest extends TestCase
 
         $this->signIn()
             ->patch(route('replies.update', $reply->id))
-            ->assertStatus(403);
+            ->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
     /** @test */
-    function authorized_users_can_update_replies()
+    public function authorized_users_can_update_replies()
     {
         $this->signIn();
 
@@ -100,7 +101,7 @@ class ParticipateInThreadsTest extends TestCase
     }
 
     /** @test */
-    function replies_that_contain_spam_may_not_be_created()
+    public function replies_that_contain_spam_may_not_be_created()
     {
         $this->withExceptionHandling();
 
@@ -112,11 +113,11 @@ class ParticipateInThreadsTest extends TestCase
         ]);
 
         $this->json('post', $thread->path() . '/replies', $reply->toArray())
-            ->assertStatus(422);
+            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     /** @test */
-    function users_may_only_reply_a_maximum_of_once_per_minute()
+    public function users_may_only_reply_a_maximum_of_once_per_minute()
     {
         $this->withExceptionHandling();
 
@@ -126,9 +127,9 @@ class ParticipateInThreadsTest extends TestCase
         $reply = make(\App\Reply::class);
 
         $this->post($thread->path() . '/replies', $reply->toArray())
-            ->assertStatus(201);
+            ->assertStatus(Response::HTTP_CREATED);
 
         $this->post($thread->path() . '/replies', $reply->toArray())
-            ->assertStatus(429);
+            ->assertStatus(Response::HTTP_TOO_MANY_REQUESTS);
     }
 }

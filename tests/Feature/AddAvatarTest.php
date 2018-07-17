@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Illuminate\Http\Response;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -17,7 +18,7 @@ class AddAvatarTest extends TestCase
         $this->withExceptionHandling();
 
         $this->json('POST', 'api/users/1/avatar')
-            ->assertStatus(401);
+            ->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     /** @test */
@@ -27,7 +28,7 @@ class AddAvatarTest extends TestCase
 
         $this->json('POST', route('avatar', auth()->id()), [
             'avatar' => 'not-an-image'
-        ])->assertStatus(422);
+        ])->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     /** @test */
@@ -41,7 +42,7 @@ class AddAvatarTest extends TestCase
             'avatar' => $file = UploadedFile::fake()->image('avatar.jpg')
         ]);
 
-        $this->assertEquals(asset('avatars/'.$file->hashName()), auth()->user()->avatar_path);
+        $this->assertEquals(asset('avatars/' . $file->hashName()), auth()->user()->avatar_path);
 
         Storage::disk('public')->assertExists('avatars/' . $file->hashName());
     }
